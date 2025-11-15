@@ -13,7 +13,7 @@
     <modules>
         <module>lib-negocio</module>
         <module>ms-cliente-pedidos</module>
-        <module>ms-proveedor-facturacion</module>
+        <module>ms-proveedores-facturas</module>
     </modules>
 
 </project>
