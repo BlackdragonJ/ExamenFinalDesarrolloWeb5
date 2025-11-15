@@ -1,0 +1,92 @@
+
+//POST Cliente 1
+{
+  "nombre": "Juan Pérez",
+  "correo": "juan.perez@example.com"
+}
+
+//POST Pedido Cliente 1
+{
+  "clienteId": 1,
+  "productos": [
+    {
+      "nombre": "Laptop Lenovo",
+      "precio": 5500.00
+    },
+    {
+      "nombre": "Mouse Logitech",
+      "precio": 150.00
+    }
+  ]
+}
+
+//POST Cliente 2
+{
+  "nombre": "Ana García",
+  "correo": "ana.garcia@example.com"
+}
+
+//POST Pedido Cliente 2
+{
+  "clienteId": 2,
+  "productos": [
+    {
+      "nombre": "Auriculares Bluetooth",
+      "precio": 300.00
+    },
+    {
+      "nombre": "Power Bank 20000mAh",
+      "precio": 180.00
+    },
+    {
+      "nombre": "Cargador USB-C",
+      "precio": 90.00
+    }
+  ]
+}
+
+//-----------------------------------------------------------------------------------------------------
+
+//POST Proveedor 1
+{
+  "nombre": "TechWorld S.A.",
+  "correo": "ventas@techworld.com"
+}
+
+//POST Factura 1
+{
+  "proveedorId": 1,
+  "pedidos": [
+    {
+      "pedidoId": 1,
+      "total": 6336.0
+    },
+    {
+      "pedidoId": 2,
+      "total": 640.8
+    }
+  ]
+}
+
+//POST Proveedor 2
+{
+  "nombre": "Suministros Globales",
+  "correo": "contacto@suministrosglobales.com"
+}
+
+//POST Factura 2
+{
+  "proveedorId": 2,
+  "pedidos": [
+    {
+      "pedidoId": 3,
+      "total": 1800.0
+    }
+  ]
+}
+
+
+//yaml de componente
+
+http://localhost:8080/v3/api-docs.yaml - A
+http://localhost:8081/v3/api-docs.yaml - B

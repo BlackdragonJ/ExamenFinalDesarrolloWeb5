@@ -1,0 +1,169 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /pedidos:
+    get:
+      tags:
+      - pedidos-controller
+      operationId: listarPedidos
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PedidoDto"
+    post:
+      tags:
+      - pedidos-controller
+      operationId: crearPedido
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PedidoInput"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PedidoDto"
+  /clientes:
+    get:
+      tags:
+      - clientes-controller
+      operationId: listarClientes
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ClienteDto"
+    post:
+      tags:
+      - clientes-controller
+      operationId: crearCliente
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClienteInput"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ClienteDto"
+  /pedidos/{id}:
+    get:
+      tags:
+      - pedidos-controller
+      operationId: obtenerPedido
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PedidoDto"
+  /clientes/{id}:
+    get:
+      tags:
+      - clientes-controller
+      operationId: obtenerCliente
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ClienteDto"
+components:
+  schemas:
+    PedidoInput:
+      required:
+      - clienteId
+      - productos
+      type: object
+      properties:
+        clienteId:
+          type: integer
+          format: int64
+        productos:
+          maxItems: 2147483647
+          minItems: 1
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductoDto"
+    ProductoDto:
+      type: object
+      properties:
+        nombre:
+          type: string
+        precio:
+          type: number
+          format: double
+    PedidoDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        clienteId:
+          type: integer
+          format: int64
+        productos:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductoDto"
+        total:
+          type: number
+          format: double
+    ClienteInput:
+      required:
+      - correo
+      - nombre
+      type: object
+      properties:
+        nombre:
+          type: string
+        correo:
+          type: string
+    ClienteDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nombre:
+          type: string
+        correo:
+          type: string

@@ -1,0 +1,165 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8081
+  description: Generated server url
+paths:
+  /proveedores:
+    get:
+      tags:
+      - proveedores-controller
+      operationId: listarProveedores
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ProveedorDto"
+    post:
+      tags:
+      - proveedores-controller
+      operationId: crearProveedor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProveedorInput"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProveedorDto"
+  /facturas:
+    get:
+      tags:
+      - facturas-controller
+      operationId: listarFacturas
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FacturaDto"
+    post:
+      tags:
+      - facturas-controller
+      operationId: crearFactura
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FacturaInput"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FacturaDto"
+  /proveedores/{id}:
+    get:
+      tags:
+      - proveedores-controller
+      operationId: obtenerProveedor
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProveedorDto"
+  /facturas/{id}:
+    get:
+      tags:
+      - facturas-controller
+      operationId: obtenerFactura
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FacturaDto"
+components:
+  schemas:
+    ProveedorInput:
+      required:
+      - correo
+      - nombre
+      type: object
+      properties:
+        nombre:
+          type: string
+        correo:
+          type: string
+    ProveedorDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nombre:
+          type: string
+        correo:
+          type: string
+    FacturaInput:
+      type: object
+      properties:
+        proveedorId:
+          type: integer
+          format: int64
+        pedidos:
+          type: array
+          items:
+            $ref: "#/components/schemas/PedidoReferenciaDto"
+    PedidoReferenciaDto:
+      type: object
+      properties:
+        pedidoId:
+          type: integer
+          format: int64
+        total:
+          type: number
+          format: double
+    FacturaDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        proveedorId:
+          type: integer
+          format: int64
+        pedidos:
+          type: array
+          items:
+            $ref: "#/components/schemas/PedidoReferenciaDto"
+        totalFactura:
+          type: number
+          format: double
